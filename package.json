@@ -4,13 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "client-install": "cd .. && npm start",
+    "client-install": "npm install --prefix leave-tracker",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "server": "nodemon server.js",
-    "client": "cd .. && npm start ",
+    "client": "npm start --prefix leave-tracker",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install cd .. && npm run build cd .."
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix leave-tracker && npm run build --prefix leave-tracker"
+  },
+  "engines": {
+    "node": "v13.11.x"
+    
   },
   "keywords": [],
   "author": "",

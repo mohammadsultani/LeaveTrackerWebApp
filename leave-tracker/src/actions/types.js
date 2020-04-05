@@ -1,0 +1,7 @@
+export const FETCH_LEAVE_REQUESTS = 'FETCH_LEAVE_REQUESTS'
+export const POST_LEAVE_REQUESTS = 'POST_LEAVE_REQUESTS'
+export const UPDATE_LEAVE_REQUESTS = 'UPDATE_LEAVE_REQUESTS'
+export const DELETE_LEAVE_REQUESTS = 'DELETE_LEAVE_REQUESTS'
+export const Approve_Leave_Request = 'Approve_Leave_Request'
+export const Deny_Leave_Request = 'Deny_Leave_Request'
+export const LEAVE_REQUESTS_LOADING = 'LEAVE_REQUEST_LOADING'
