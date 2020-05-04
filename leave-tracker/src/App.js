@@ -1,30 +1,54 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css"
 import { Provider } from 'react-redux'
-
-import Navbar from "./components/navbar.component"
-import LeavesList from "./components/leaves-list.component"
-import EditRequest from "./components/edit-request.component"
-import CreateRequest from "./components/create-request.component"
-import MyLeaves from "./components/myleave.component"
+import { loadUser } from './actions/authActions'
+import './index.css'
+import Navbar from "./components/navbars/Navbar"
+import LeavesList from "./components/LeavesList"
+import EditRequest from "./components/EditRequest"
+import CreateRequest from "./components/CreateRequest"
+import MyLeaves from "./components/MyLeave"
+import UsersList from './components/UsersList'
 import store from './store'
+import EditAccount from './components/EditAccount'
+import RequiredAuth from './components/Authorization'
+import AdminPage from './components/AdminPage'
+import ResetPassword from './components/ResetPassword'
+import calender from './components/Calender'
 
-function App() {
-  return (
-    <Provider store={store} >
-        <Router>
-          <div className="container">
-          <Navbar />
-          <br/>
-          <Route path="/" exact component={LeavesList} />
-          <Route path="/edit/:id" component={EditRequest}/>
-          <Route path="/create" component={CreateRequest}/>
-          <Route path="/myleaves" component={MyLeaves}/>
-          </div>
-        </Router>
-    </Provider>
-  );
+class App extends Component {
+  
+  componentWillMount() {
+    if(localStorage.getItem('email')) { // Here we define a condition to avoid callig loadUser in ResetPassword component.
+      return null                   // if local storage has email then we dont want to load user info
+    }else {                         //  else it should load as usual.
+      store.dispatch(loadUser()) 
+    }
+    
+  }
+  render() {  
+    return (
+      <Provider store={store} >
+          <Router>
+            <div className="container">
+            <Navbar />
+            <br/>
+            <Route path="/calender" component={calender}/>
+            <Route path="/editaccount" component={RequiredAuth(EditAccount)}/>
+            <Route path="/resetpass/:token" component={ResetPassword} />
+            <Route path="/myleaves" component={RequiredAuth(MyLeaves)}/>
+            <Route path="/leaveslist" component={RequiredAuth(LeavesList)} />
+            <Route path="/edit/:id" component={RequiredAuth(EditRequest)}/>
+            <Route path="/create" component={RequiredAuth(CreateRequest)}/>
+            <Route path="/adminpage" component={RequiredAuth(AdminPage)}/>
+            <Route path="/userslist" component={RequiredAuth(UsersList)}/>
+            </div>
+          </Router>
+      </Provider>
+    );
+  }
+ 
 }
 
 export default App;

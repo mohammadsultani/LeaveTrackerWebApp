@@ -1,18 +1,19 @@
 const router = require('express').Router()
 let leaveRequest = require('../models/leave.model')
+const auth = require('../middleware/auth') 
 
-router.route('/').get((req,res) => {
+router.get('/',auth,(req,res) => {
     leaveRequest.find()
         .then(leaves => res.json(leaves))
-        .catch(err => res.status(400).json('Error: ' + err))
+        .catch(err => res.status(400).json('msg: ' + err))
 })
-
-router.route('/add').post((req,res) => {
+router.post('/add',auth,(req,res) => {
     const name = req.body.name
     const type_of_leave = req.body.type_of_leave
-    const start = req.body.start
-    const end = req.body.end
-    const approved = req.body.approved
+    const number_of_days = req.body.number_of_days
+    const startDate = req.body.startDate
+    const endDate = req.body.endDate
+    const status = req.body.status
     const leave_reason = req.body.leave_reason
     const action_reason = req.body.action_reason
 
@@ -20,45 +21,42 @@ router.route('/add').post((req,res) => {
         name,
         type_of_leave,
         leave_reason,
-        start,
-        end,
-        approved,
+        number_of_days,
+        startDate,
+        endDate,
+        status,
         action_reason
     })
      newLeave.save()
         .then(() => res.json('Leave Request added!'))
-        .catch(err => res.status(400).json('Error: ' + err))
+        .catch(err => res.status(400).json('msg: ' + err))
 })
-router.route('/:id').get((req,res) => {
+router.get('/:id',auth,(req,res) => {
     leaveRequest.findById(req.params.id)
-        .then((leave) => res.json(leave))
-        .catch(err => res.status(400).json('Error: ' + err))
+        .then(leave => res.json(leave))
+        .catch(err => res.status(400).json('msg: ' + err))
 })
-router.route('/:name').get((req,res) => {
-    leaveRequest.findById(req.params.name)
-        .then((leave) => res.json(leave))
-        .catch(err => res.status(400).json('Error: ' + err))
-})
-router.route('/:id').delete((req,res) =>{
+router.delete('/:id',auth,(req,res) =>{
     leaveRequest.findByIdAndDelete(req.params.id)
         .then(() => res.json('Leave Request deleted!'))
-        .catch(err => res.status(400).json("Error: " + err))
+        .catch(err => res.status(400).json("msg: " + err))
 })
-router.route('/update/:id').post((req,res) => {
+router.post('/update/:id',auth,(req,res) => {
     leaveRequest.findById(req.params.id)
         .then(leaveRequest => {
             leaveRequest.name = req.body.name
             leaveRequest.type_of_leave = req.body.type_of_leave
             leaveRequest.leave_reason = req.body.leave_reason
-            leaveRequest.start = Date.parse(req.body.start)
-            leaveRequest.end = Date.parse(req.body.end)
-            leaveRequest.approved = req.body.approved
+            leaveRequest.number_of_days = req.body.number_of_days
+            leaveRequest.startDate = Date.parse(req.body.startDate)
+            leaveRequest.endDate = Date.parse(req.body.endDate)
+            leaveRequest.status = req.body.status
             leaveRequest.action_reason = req.body.action_reason
             leaveRequest.save()
             .then(() => res.json('Leave Request Updated!'))
-            .catch(err => res.status(400).json('Error: ' + err))
+            .catch(err => res.status(400).json('msg: ' + err))
         })
-        .catch(err => res.status(400).json('Error: ' + err))        
+        .catch(err => res.status(400).json('msg: ' + err))        
 })
 
 module.exports = router 
