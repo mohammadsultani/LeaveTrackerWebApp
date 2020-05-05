@@ -25,18 +25,18 @@ class Guest extends Component {
                         <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="mr-auto" navbar>
                         <Row>
-                            <Col md={3}></Col>
-                            <Col md={2}>
+                            <Col l={3}></Col>
+                            <Col l={2}>
                                 <NavItem>
                                     <NavLink href="#">
                                         <LoginModal /> 
                                     </NavLink>
                                 </NavItem>
                             </Col>
-                            <Col md={1}></Col>  {/* THe extra Cols are for alignment and spacing */}
-                            <Col md={2}></Col>
-                            <Col md={3}></Col>
-                            <Col md={1}>
+                            <Col l={1}></Col>  {/* THe extra Cols are for alignment and spacing */}
+                            <Col l={2}></Col>
+                            <Col l={3}></Col>
+                            <Col l={1}>
                                 <NavItem> 
                                     <NavLink href="">
                                         <RegisterModal /> 
