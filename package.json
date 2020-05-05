@@ -13,9 +13,6 @@
     "client": "cd client && npm start",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
-  "engines": {
-    "node": "12.x..."
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
