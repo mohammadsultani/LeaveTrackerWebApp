@@ -24,26 +24,17 @@ class Guest extends Component {
                         <NavbarToggler onClick={this.toggle} />
                         <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="mr-auto" navbar>
-                        <Row>
-                            <Col l={3}></Col>
-                            <Col l={2}>
-                                <NavItem>
-                                    <NavLink href="#">
+                                <NavItem style={{marginRight:"40%",marginLeft:"50%"}}>
+                                    <NavLink href="">
                                         <LoginModal /> 
                                     </NavLink>
                                 </NavItem>
-                            </Col>
-                            <Col l={1}></Col>  {/* THe extra Cols are for alignment and spacing */}
-                            <Col l={2}></Col>
-                            <Col l={3}></Col>
-                            <Col l={1}>
-                                <NavItem> 
+                                
+                                <NavItem style={{marginLeft:"40%"}}> 
                                     <NavLink href="">
                                         <RegisterModal /> 
-                                    </NavLink>
-                                </NavItem>
-                            </Col>
-                        </Row>
+                                </NavLink>
+                            </NavItem>
                         </Nav>
                         </Collapse>
                     </Navbar>
@@ -53,6 +44,7 @@ class Guest extends Component {
                     <Alert color="primary" style={{textAlign:"center"}}>
                         PLease Log in or Register an Account
                     </Alert>
+                   
             </Container>
         )
     }
