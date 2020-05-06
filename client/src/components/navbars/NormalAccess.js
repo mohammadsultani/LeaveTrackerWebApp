@@ -31,6 +31,9 @@ class NormalAccess extends Component {
                                 <NavItem className="create">
                                     <NavLink href="/create">Create Leave Request</NavLink>
                                 </NavItem>
+                                <NavItem className="create">
+                                    <NavLink href="/leaveslist">All Leaves</NavLink>
+                                </NavItem>
                                 <NavItem className="myLeave">
                                     <NavLink href="/myleaves">My Leaves</NavLink>
                                 </NavItem>

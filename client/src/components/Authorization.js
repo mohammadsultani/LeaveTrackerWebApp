@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 function RequiredAuth(Input){
     class Authorization extends Component {
         render() {
-            const { token ,isAuthenticated } = this.props
+            const { token ,isAuthenticated} = this.props
             if (token && isAuthenticated){
                 return (
                     <Fragment>

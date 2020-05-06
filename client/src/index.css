@@ -44,5 +44,8 @@ code {
   .firstSection {           /* It is used for Navbar in Normal Access Component   */
     margin-left: 10%;
   }
+  .secondSection{
+    margin-left: 10%;
+  }
  
 }

@@ -123,118 +123,160 @@ class LeavesList extends Component {
       <button onClick={this.approveRequest}>Approve</button>
       <button onClick={this.closeModal}>Close</button>
     </div>
-    return (
-      <Container>
-        <Row>
-          {
-            this.props.leaveTypes.map((e,i) => (
-              <Col key={i} style={{backgroundColor:e.type_of_color}}>{e.type_of_leave}</Col>
-            ))
-          }
-        </Row>
-        <br />
-        <Table>
-          <thead className="thead-dark">
-            <tr>
-              <th>Name</th>
-              <th>Number of Days</th>
-              <th>Request Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              this.props.takenLeaves.map((request, index) => (
-                this.showRequests(request, index)
-              ))
-            }
-            {
-              this.props.approvedRequests.map((request, index) => {
-               
-                return this.showRequests(request, index)
-
-              })
-
-            }
-            {
-              this.props.newRequests.map((request, index) => (
-                this.showRequests(request, index)
-              ))
-            }
-            {
-              this.props.deniedRequests.map((request, index) => (
-                this.showRequests(request, index)
-              ))
-            }
-          </tbody>
-        </Table>
-        <Modal isOpen={this.state.showModal}>
-          <ModalHeader toggle={this.closeModal}>Leave Request</ModalHeader>
-          <ModalBody>
-            <Form>
-              <Row form>
-                <Col md={6}>
-                  <FormGroup>
-                    <Label>Name</Label>
-                    <Input type="text" disabled placeholder={this.state.leaveRequest.name} />
-                  </FormGroup>
-                </Col>
-                <Col md={6}>
-                  <FormGroup>
-                    <Label>Type of Leave</Label>
-                    <Input type="text" disabled placeholder={this.state.leaveRequest.type_of_leave} />
-                  </FormGroup>
-                </Col>
+    if (this.props.accessLevel === "Normal Access") {
+      return(
+            <Container>
+              <Row>
+                {
+                  this.props.leaveTypes.map((e,i) => (
+                    <Col key={i} style={{backgroundColor:e.type_of_color,textAlign:"center"}}>{e.type_of_leave}</Col>
+                  ))
+                }
               </Row>
-              <FormGroup>
-                <Label>Leave Reason</Label>
-                <Input type="textarea" disabled placeholder={this.state.leaveRequest.leave_reason} />
-              </FormGroup>
-              <Row form>
-                <Col md={6}>
-                  <FormGroup>
-                    <Label>Start Date</Label>
-                    <Input type="text" disabled placeholder={this.state.startDate} />
-                  </FormGroup>
-                </Col>
-                <Col md={6}>
-                  <FormGroup>
-                    <Label>End Date</Label>
-                    <Input type="text" disabled placeholder={this.state.endDate} />
-                  </FormGroup>
-                </Col>
-              </Row>
+              <br />
+              <h5 style={{textAlign:"center"}}>Appproved Leave Requests</h5>
+              <br/>
+              <Table>
+                <thead className="thead-dark">
+                  <tr>
+                      <th width="30%">Name</th>
+                      <th width="25%">Start Date</th>
+                      <th width="25%">End Date</th>
+                      <th width="20%">Number Of Days</th>   
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    this.props.approvedRequests.map(e => {
+                      const color = this.props.leaveTypes.filter(x => x.type_of_leave === e.type_of_leave).map(x => x.type_of_color)
+              return (  <tr style={{backgroundColor:color}} key={e._id}>
+                        <td>{e.name}</td>
+                        <td>{e.startDate.substring(0,10)}</td>
+                        <td>{e.endDate.substring(0,10)}</td>
+                        <td>{e.number_of_days}</td>
+                      </tr> )
+                    })
+                  }
+                </tbody>
+              </Table>
+            </Container>       
+      )
+    }else {
+      return (
+        <Container>
+          <Row>
+            {
+              this.props.leaveTypes.map((e,i) => (
+                <Col key={i} style={{backgroundColor:e.type_of_color}}>{e.type_of_leave}</Col>
+              ))
+            }
+          </Row>
+          <br />
+          <Table>
+            <thead className="thead-dark">
+              <tr>
+                <th>Name</th>
+                <th>Number of Days</th>
+                <th>Request Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
               {
-                this.state.leaveRequest.status === "New Request" ? 
-                <FormGroup>
-                  <Label>Action Reason</Label>
-                  <Input type="textarea" name="actionReason" value={this.state.actionReason} onChange={this.handleChange} />
-                </FormGroup> : 
-                this.state.leaveRequest.status === "Approved" || "Taken" ? 
-                <FormGroup>
-                  <Label>Approved Reason</Label>
-                  <Input type="textarea" value={this.state.leaveRequest.action_reason} disabled />
-                </FormGroup> : 
-                <FormGroup>
-                  <Label>Denied Reason</Label>
-                  <Input type="textarea" value={this.state.leaveRequest.action_reason} disabled />
-                </FormGroup> 
+                this.props.takenLeaves.map((request, index) => (
+                  this.showRequests(request, index)
+                ))
               }
-              
-            </Form>
-          </ModalBody>
-          <ModalFooter>
-            {
-              this.state.leaveRequest.status === "Approved" ?
-                deny :
-                this.state.leaveRequest.status === "New Request" ?
-                  newRequest : approve
-            }
-          </ModalFooter>
-        </Modal>
-
-      </Container>
-    )
+              {
+                this.props.approvedRequests.map((request, index) => {
+                 
+                  return this.showRequests(request, index)
+  
+                })
+  
+              }
+              {
+                this.props.newRequests.map((request, index) => (
+                  this.showRequests(request, index)
+                ))
+              }
+              {
+                this.props.deniedRequests.map((request, index) => (
+                  this.showRequests(request, index)
+                ))
+              }
+            </tbody>
+          </Table>
+          <Modal isOpen={this.state.showModal}>
+            <ModalHeader toggle={this.closeModal}>Leave Request</ModalHeader>
+            <ModalBody>
+              <Form>
+                <Row form>
+                  <Col md={6}>
+                    <FormGroup>
+                      <Label>Name</Label>
+                      <Input type="text" disabled placeholder={this.state.leaveRequest.name} />
+                    </FormGroup>
+                  </Col>
+                  <Col md={6}>
+                    <FormGroup>
+                      <Label>Type of Leave</Label>
+                      <Input type="text" disabled placeholder={this.state.leaveRequest.type_of_leave} />
+                    </FormGroup>
+                  </Col>
+                </Row>
+                <FormGroup>
+                  <Label>Leave Reason</Label>
+                  <Input type="textarea" disabled placeholder={this.state.leaveRequest.leave_reason} />
+                </FormGroup>
+                <Row form>
+                  <Col md={6}>
+                    <FormGroup>
+                      <Label>Start Date</Label>
+                      <Input type="text" disabled placeholder={this.state.startDate} />
+                    </FormGroup>
+                  </Col>
+                  <Col md={6}>
+                    <FormGroup>
+                      <Label>End Date</Label>
+                      <Input type="text" disabled placeholder={this.state.endDate} />
+                    </FormGroup>
+                  </Col>
+                </Row>
+                {
+                  this.state.leaveRequest.status === "New Request" ? 
+                  <FormGroup>
+                    <Label>Action Reason</Label>
+                    <Input type="textarea" name="actionReason" value={this.state.actionReason} onChange={this.handleChange} />
+                  </FormGroup> : 
+                  this.state.leaveRequest.status === "Approved" || "Taken" ? 
+                  <FormGroup>
+                    <Label>Approved Reason</Label>
+                    <Input type="textarea" value={this.state.leaveRequest.action_reason} disabled />
+                  </FormGroup> : 
+                  <FormGroup>
+                    <Label>Denied Reason</Label>
+                    <Input type="textarea" value={this.state.leaveRequest.action_reason} disabled />
+                  </FormGroup> 
+                }
+                
+              </Form>
+            </ModalBody>
+            <ModalFooter>
+              {
+                this.state.leaveRequest.status === "Approved" ?
+                  deny :
+                  this.state.leaveRequest.status === "New Request" ?
+                    newRequest : approve
+              }
+            </ModalFooter>
+          </Modal>
+  
+        </Container>
+      )
+    }
+    
+    
   }
 }
 const mapStateToProps = state => {
@@ -246,6 +288,7 @@ const mapStateToProps = state => {
     deniedRequests: state.requests.deniedRequests,
     isAuthenticated: state.auth.isAuthenticated,
     leaveTypes: state.types.leaveTypes,
+    accessLevel: state.auth.accessLevel,
     takenLeaveDays: state.users.takenLeaveDays // This is the number of leave days token of user.
   }
 }

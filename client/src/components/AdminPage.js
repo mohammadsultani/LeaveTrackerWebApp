@@ -78,169 +78,176 @@ export class AdminPage extends Component {
         }
     }
     render() {
-        return ( 
-            <Form>
-                <FormGroup>
-                                 {/*          Leave Type Display Block              */}
-                    <h6 style={{textAlign:"center"}}>Types Of Leaves With Background Color</h6>
-                    {
-                        this.props.leaveTypes.length > 0 ? 
-                        <Row>
-                        {
-                            this.props.leaveTypes.map((e,i) =>(
-                                <Col key={i} style={{textAlign:"center",backgroundColor:e.type_of_color}}>
-                                    {e.type_of_leave}
-                                </Col>
-                            ))
-                        }
-                        </Row> : <Alert color="info" style={{textAlign:"center"}} >There Are No Leave Types Yet</Alert> 
-                    }
-                    
-                </FormGroup>
-                {/*           Leave Types  Buttons Section               */}
-                <div hidden={this.state.hideButtons}>
-                    <Row>
-                        <Col>
-                            <FormGroup style={{textAlign:"center"}}>
-                                <Button style={{fontSize:"80%"}} color="success" onClick={() => {this.setState({ hideButtons: true, hideAddLeave: false})}}>Add Type of Leave</Button> 
-                            </FormGroup>
-                        </Col>
-                        <Col>
-                            <FormGroup style={{textAlign:"center"}}>
-                                <Button style={{fontSize:"80%"}} color="danger" onClick={() => {this.setState({ hideButtons: true, hideDeleteLeave: false})}}>Delete Type of Leave</Button> 
-                            </FormGroup>
-                        </Col>
-                    </Row>
-                </div>
-                            {/*    Position Types display block    */}
-                <FormGroup>
-                    <h6 style={{textAlign:"center"}}>Types Of Positions With Background Color</h6>
-                    {
-                        this.props.positionTypes.length > 0 ? 
-                        <Row>
-                        {
-                            this.props.positionTypes.map((e,i) => {
-                              return (
-                                <Col key={i} style={{textAlign:"center",backgroundColor:e.position_color}}>
-                                    {e.position_type}
-                                </Col>
-                                )
-                            }
-                                
-                            ) 
-                        }
-                        </Row> : <Alert color="info" style={{textAlign:"center"}} >There Are No Positions Types Yet</Alert>  
-                    }
-                    
-                    
-                </FormGroup>
-                {/*              Add Leave Type Section           */}
-                <div hidden={this.state.hideAddLeave}>
-                    <FormGroup >
-                        <Label>Leave Type</Label>
-                        <Input type="text" name="leaveType" onChange={this.handleChange}/>
-                    </FormGroup>
+        if(this.props.accessLevel === "Normal Access") {
+            return( <Alert color="danger" style={{textAlign:"center",marginTop:"20%"}}
+            >You Don't have permission to access this page </Alert> )
+        }else{
+            return ( 
+                <Form>
                     <FormGroup>
-                        <Label>Leave Color</Label>
-                        <Input type="color" name="leaveColor" onChange={this.handleChange}/>
-                    </FormGroup>
-                    <FormGroup>
-                        <Label>Should it be counted in number of leave days taken by user</Label>
-                        <Input type="select" name="isCounted" onChange={this.handleChange}> 
-                            { 
-                                this.state.yesNoArray.map((e,i) => (
-                                    <option key={i}>{e}</option>
+                                     {/*          Leave Type Display Block              */}
+                        <h6 style={{textAlign:"center"}}>Types Of Leaves With Background Color</h6>
+                        {
+                            this.props.leaveTypes.length > 0 ? 
+                            <Row>
+                            {
+                                this.props.leaveTypes.map((e,i) =>(
+                                    <Col key={i} style={{textAlign:"center",backgroundColor:e.type_of_color}}>
+                                        {e.type_of_leave}
+                                    </Col>
                                 ))
                             }
-                        </Input>
+                            </Row> : <Alert color="info" style={{textAlign:"center"}} >There Are No Leave Types Yet</Alert> 
+                        }
+                        
                     </FormGroup>
+                    {/*           Leave Types  Buttons Section               */}
+                    <div hidden={this.state.hideButtons}>
+                        <Row>
+                            <Col>
+                                <FormGroup style={{textAlign:"center"}}>
+                                    <Button style={{fontSize:"80%"}} color="success" onClick={() => {this.setState({ hideButtons: true, hideAddLeave: false})}}>Add Type of Leave</Button> 
+                                </FormGroup>
+                            </Col>
+                            <Col>
+                                <FormGroup style={{textAlign:"center"}}>
+                                    <Button style={{fontSize:"80%"}} color="danger" onClick={() => {this.setState({ hideButtons: true, hideDeleteLeave: false})}}>Delete Type of Leave</Button> 
+                                </FormGroup>
+                            </Col>
+                        </Row>
+                    </div>
+                                {/*    Position Types display block    */}
                     <FormGroup>
-                        <Label>How it Will Look</Label>
-                        <Input disabled style={{backgroundColor:this.state.leaveColor}} placeholder={this.state.leaveType}/>
-                    </FormGroup>
-                    <FormGroup style={{display:"flex", justifyContent:"space-between"}} >
-                        <Button color="primary" onClick={this.onSubmitLeaveType}>Submit</Button>
-                        <Button color="danger" onClick={() => { this.setState({ hideAddLeave: true, hideButtons: false})}}>x</Button>
-                    </FormGroup>
-                </div>
-                    {/*       Delete Leave Type Section       */}
-                <div hidden={this.state.hideDeleteLeave}>
-                    <FormGroup>
-                        <Label>Select one to delete</Label>
-                        <Input onChange={this.storeId} type="select">
-                            { this.props.leaveTypes.map((e,i) => (
-                                <option key={i}>{e.type_of_leave}</option>
-                            )) 
+                        <h6 style={{textAlign:"center"}}>Types Of Positions With Background Color</h6>
+                        {
+                            this.props.positionTypes.length > 0 ? 
+                            <Row>
+                            {
+                                this.props.positionTypes.map((e,i) => {
+                                  return (
+                                    <Col key={i} style={{textAlign:"center",backgroundColor:e.position_color}}>
+                                        {e.position_type}
+                                    </Col>
+                                    )
+                                }
+                                    
+                                ) 
                             }
-                        </Input>
+                            </Row> : <Alert color="info" style={{textAlign:"center"}} >There Are No Positions Types Yet</Alert>  
+                        }
+                        
+                        
                     </FormGroup>
-                    <FormGroup style={{display:"flex", justifyContent:"space-between"}} >
-                        <Button color="warning" onClick={this.deleteLeaveType}>Delete</Button>
-                        <Button color="danger" onClick={() => { this.setState({ hideDeleteLeave: true, hideButtons: false})}}>x</Button>
-                    </FormGroup>
-                </div>
-                
-                {  /*          Type of Positions Buttons sections                    */ }
-                
-                <div hidden={this.state.hideButtons}>
-                    <Row>
-                        <Col>
-                            <FormGroup style={{textAlign:"center"}}>
-                                <Button style={{fontSize:"80%"}} color="success" onClick={() => {this.setState({ hideButtons: true, hideAddPosition: false})}}>Add Type of Position</Button> 
-                            </FormGroup>
-                        </Col>
-                        <Col>
-                            <FormGroup style={{textAlign:"center"}}>
-                                <Button style={{fontSize:"80%"}} color="danger" onClick={() => {this.setState({ hideButtons: true, hideDeletePosition: false})}}>Delete Type of Position</Button> 
-                            </FormGroup>
-                        </Col>
-                    </Row>
-                </div>
-                {/*           Add Position Type Section           */}
-                <div hidden={this.state.hideAddPosition}>
-                    <FormGroup >
-                        <Label>Position Type</Label>
-                        <Input type="text" name="positionType" onChange={this.handleChange}/>
-                    </FormGroup>
-                    <FormGroup>
-                        <Label>Leave Color</Label>
-                        <Input type="color" name="positionColor" onChange={this.handleChange}/>
-                    </FormGroup>
-                    <FormGroup>
-                        <Label>How it Will Look</Label>
-                        <Input disabled style={{backgroundColor:this.state.positionColor}} placeholder={this.state.positionType}/>
-                    </FormGroup>
-                    <FormGroup style={{display:"flex", justifyContent:"space-between"}} >
-                        <Button color="primary" onClick={this.onSubmitPosition}>Submit</Button>
-                        <Button color="danger" onClick={() => { this.setState({ hideAddPosition: true, hideButtons: false})}}>x</Button>
-                    </FormGroup>
-                </div>
-                {/*         Delete Position Type Section        */}
-                <div hidden={this.state.hideDeletePosition}>
-                    <FormGroup>
-                        <Label>Select one to delete</Label>
-                        <Input onChange={this.storeId} type="select">
-                            { this.props.positionTypes.map((e,i) => (
-                                <option key={i}>{e.position_type}</option>
-                            )) 
-                            }
-                        </Input>
-                    </FormGroup>
-                    <FormGroup style={{display:"flex", justifyContent:"space-between"}} >
-                        <Button color="warning" onClick={this.deletePositionType}>Delete</Button>
-                        <Button color="danger" onClick={() => { this.setState({ hideDeletePosition: true, hideButtons: false})}}>x</Button>
-                    </FormGroup>
-                </div>
-                
-            </Form>
-        )
+                    {/*              Add Leave Type Section           */}
+                    <div hidden={this.state.hideAddLeave}>
+                        <FormGroup >
+                            <Label>Leave Type</Label>
+                            <Input type="text" name="leaveType" onChange={this.handleChange}/>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label>Leave Color</Label>
+                            <Input type="color" name="leaveColor" onChange={this.handleChange}/>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label>Should it be counted in number of leave days taken by user</Label>
+                            <Input type="select" name="isCounted" onChange={this.handleChange}> 
+                                { 
+                                    this.state.yesNoArray.map((e,i) => (
+                                        <option key={i}>{e}</option>
+                                    ))
+                                }
+                            </Input>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label>How it Will Look</Label>
+                            <Input disabled style={{backgroundColor:this.state.leaveColor}} placeholder={this.state.leaveType}/>
+                        </FormGroup>
+                        <FormGroup style={{display:"flex", justifyContent:"space-between"}} >
+                            <Button color="primary" onClick={this.onSubmitLeaveType}>Submit</Button>
+                            <Button color="danger" onClick={() => { this.setState({ hideAddLeave: true, hideButtons: false})}}>x</Button>
+                        </FormGroup>
+                    </div>
+                        {/*       Delete Leave Type Section       */}
+                    <div hidden={this.state.hideDeleteLeave}>
+                        <FormGroup>
+                            <Label>Select one to delete</Label>
+                            <Input onChange={this.storeId} type="select">
+                                { this.props.leaveTypes.map((e,i) => (
+                                    <option key={i}>{e.type_of_leave}</option>
+                                )) 
+                                }
+                            </Input>
+                        </FormGroup>
+                        <FormGroup style={{display:"flex", justifyContent:"space-between"}} >
+                            <Button color="warning" onClick={this.deleteLeaveType}>Delete</Button>
+                            <Button color="danger" onClick={() => { this.setState({ hideDeleteLeave: true, hideButtons: false})}}>x</Button>
+                        </FormGroup>
+                    </div>
+                    
+                    {  /*          Type of Positions Buttons sections                    */ }
+                    
+                    <div hidden={this.state.hideButtons}>
+                        <Row>
+                            <Col>
+                                <FormGroup style={{textAlign:"center"}}>
+                                    <Button style={{fontSize:"80%"}} color="success" onClick={() => {this.setState({ hideButtons: true, hideAddPosition: false})}}>Add Type of Position</Button> 
+                                </FormGroup>
+                            </Col>
+                            <Col>
+                                <FormGroup style={{textAlign:"center"}}>
+                                    <Button style={{fontSize:"80%"}} color="danger" onClick={() => {this.setState({ hideButtons: true, hideDeletePosition: false})}}>Delete Type of Position</Button> 
+                                </FormGroup>
+                            </Col>
+                        </Row>
+                    </div>
+                    {/*           Add Position Type Section           */}
+                    <div hidden={this.state.hideAddPosition}>
+                        <FormGroup >
+                            <Label>Position Type</Label>
+                            <Input type="text" name="positionType" onChange={this.handleChange}/>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label>Leave Color</Label>
+                            <Input type="color" name="positionColor" onChange={this.handleChange}/>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label>How it Will Look</Label>
+                            <Input disabled style={{backgroundColor:this.state.positionColor}} placeholder={this.state.positionType}/>
+                        </FormGroup>
+                        <FormGroup style={{display:"flex", justifyContent:"space-between"}} >
+                            <Button color="primary" onClick={this.onSubmitPosition}>Submit</Button>
+                            <Button color="danger" onClick={() => { this.setState({ hideAddPosition: true, hideButtons: false})}}>x</Button>
+                        </FormGroup>
+                    </div>
+                    {/*         Delete Position Type Section        */}
+                    <div hidden={this.state.hideDeletePosition}>
+                        <FormGroup>
+                            <Label>Select one to delete</Label>
+                            <Input onChange={this.storeId} type="select">
+                                { this.props.positionTypes.map((e,i) => (
+                                    <option key={i}>{e.position_type}</option>
+                                )) 
+                                }
+                            </Input>
+                        </FormGroup>
+                        <FormGroup style={{display:"flex", justifyContent:"space-between"}} >
+                            <Button color="warning" onClick={this.deletePositionType}>Delete</Button>
+                            <Button color="danger" onClick={() => { this.setState({ hideDeletePosition: true, hideButtons: false})}}>x</Button>
+                        </FormGroup>
+                    </div>
+                    
+                </Form>
+            )
+        }
+        
     }
 }
 
 const mapStateToProps = state => {
     return {
         leaveTypes : state.types.leaveTypes,
-        positionTypes: state.types.positionTypes
+        positionTypes: state.types.positionTypes,
+        accessLevel: state.auth.accessLevel
     }
 }
     
