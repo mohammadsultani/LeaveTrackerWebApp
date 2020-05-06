@@ -106,12 +106,12 @@ export class AdminPage extends Component {
                         <Row>
                             <Col>
                                 <FormGroup style={{textAlign:"center"}}>
-                                    <Button style={{fontSize:"80%"}} color="success" onClick={() => {this.setState({ hideButtons: true, hideAddLeave: false})}}>Add Type of Leave</Button> 
+                                    <Button color="success" onClick={() => {this.setState({ hideButtons: true, hideAddLeave: false})}}>Add Type of Leave</Button> 
                                 </FormGroup>
                             </Col>
                             <Col>
                                 <FormGroup style={{textAlign:"center"}}>
-                                    <Button style={{fontSize:"80%"}} color="danger" onClick={() => {this.setState({ hideButtons: true, hideDeleteLeave: false})}}>Delete Type of Leave</Button> 
+                                    <Button color="danger" onClick={() => {this.setState({ hideButtons: true, hideDeleteLeave: false})}}>Delete Type of Leave</Button> 
                                 </FormGroup>
                             </Col>
                         </Row>
@@ -162,9 +162,9 @@ export class AdminPage extends Component {
                             <Label>How it Will Look</Label>
                             <Input disabled style={{backgroundColor:this.state.leaveColor}} placeholder={this.state.leaveType}/>
                         </FormGroup>
-                        <FormGroup style={{display:"flex", justifyContent:"space-between"}} >
-                            <Button color="primary" onClick={this.onSubmitLeaveType}>Submit</Button>
-                            <Button color="danger" onClick={() => { this.setState({ hideAddLeave: true, hideButtons: false})}}>x</Button>
+                        <FormGroup style={{display:"flex", justifyContent:"space-around"}} >
+                            <Button style={{fontSize:"1.5rem"}} color="primary" onClick={this.onSubmitLeaveType}>Submit</Button>
+                            <Button style={{fontSize:"1.5rem"}} color="danger" onClick={() => { this.setState({ hideAddLeave: true, hideButtons: false})}}>x</Button>
                         </FormGroup>
                     </div>
                         {/*       Delete Leave Type Section       */}
@@ -178,9 +178,9 @@ export class AdminPage extends Component {
                                 }
                             </Input>
                         </FormGroup>
-                        <FormGroup style={{display:"flex", justifyContent:"space-between"}} >
-                            <Button color="warning" onClick={this.deleteLeaveType}>Delete</Button>
-                            <Button color="danger" onClick={() => { this.setState({ hideDeleteLeave: true, hideButtons: false})}}>x</Button>
+                        <FormGroup style={{display:"flex", justifyContent:"space-around"}} >
+                            <Button style={{fontSize:"1.5rem"}} color="warning" onClick={this.deleteLeaveType}>Delete</Button>
+                            <Button style={{fontSize:"1.5rem"}} color="danger" onClick={() => { this.setState({ hideDeleteLeave: true, hideButtons: false})}}>x</Button>
                         </FormGroup>
                     </div>
                     
@@ -190,12 +190,12 @@ export class AdminPage extends Component {
                         <Row>
                             <Col>
                                 <FormGroup style={{textAlign:"center"}}>
-                                    <Button style={{fontSize:"80%"}} color="success" onClick={() => {this.setState({ hideButtons: true, hideAddPosition: false})}}>Add Type of Position</Button> 
+                                    <Button color="success" onClick={() => {this.setState({ hideButtons: true, hideAddPosition: false})}}>Add Type of Position</Button> 
                                 </FormGroup>
                             </Col>
                             <Col>
                                 <FormGroup style={{textAlign:"center"}}>
-                                    <Button style={{fontSize:"80%"}} color="danger" onClick={() => {this.setState({ hideButtons: true, hideDeletePosition: false})}}>Delete Type of Position</Button> 
+                                    <Button color="danger" onClick={() => {this.setState({ hideButtons: true, hideDeletePosition: false})}}>Delete Type of Position</Button> 
                                 </FormGroup>
                             </Col>
                         </Row>
@@ -214,9 +214,9 @@ export class AdminPage extends Component {
                             <Label>How it Will Look</Label>
                             <Input disabled style={{backgroundColor:this.state.positionColor}} placeholder={this.state.positionType}/>
                         </FormGroup>
-                        <FormGroup style={{display:"flex", justifyContent:"space-between"}} >
-                            <Button color="primary" onClick={this.onSubmitPosition}>Submit</Button>
-                            <Button color="danger" onClick={() => { this.setState({ hideAddPosition: true, hideButtons: false})}}>x</Button>
+                        <FormGroup style={{display:"flex", justifyContent:"space-around"}} >
+                            <Button style={{fontSize:"1.5rem"}} color="primary" onClick={this.onSubmitPosition}>Submit</Button>
+                            <Button style={{fontSize:"1.5rem"}} color="danger" onClick={() => { this.setState({ hideAddPosition: true, hideButtons: false})}}>x</Button>
                         </FormGroup>
                     </div>
                     {/*         Delete Position Type Section        */}
@@ -230,9 +230,9 @@ export class AdminPage extends Component {
                                 }
                             </Input>
                         </FormGroup>
-                        <FormGroup style={{display:"flex", justifyContent:"space-between"}} >
-                            <Button color="warning" onClick={this.deletePositionType}>Delete</Button>
-                            <Button color="danger" onClick={() => { this.setState({ hideDeletePosition: true, hideButtons: false})}}>x</Button>
+                        <FormGroup style={{display:"flex", justifyContent:"space-around"}} >
+                            <Button style={{fontSize:"1.5rem"}} color="warning" onClick={this.deletePositionType}>Delete</Button>
+                            <Button style={{fontSize:"1.5rem"}} color="danger" onClick={() => { this.setState({ hideDeletePosition: true, hideButtons: false})}}>x</Button>
                         </FormGroup>
                     </div>
                     
