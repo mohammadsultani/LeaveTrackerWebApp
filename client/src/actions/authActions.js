@@ -16,7 +16,7 @@ import {
 
 import { returnErrors } from './errorActions'
 
-export const tokenConfig = getstate => {
+export const tokenConfig = () => {
     const token = localStorage.getItem('token')
     const config = {
         headers: {
@@ -29,9 +29,9 @@ export const tokenConfig = getstate => {
     return config
 }
 
-export const loadUser = () => (dispatch, getstate) => {
+export const loadUser = () => (dispatch) => {
     dispatch({ type: USER_LOADING })
-    axios.get('/auth/user/', tokenConfig(getstate))
+    axios.get('/auth/user/', tokenConfig())
         .then(res => dispatch({
             type: USER_LOADED,
             payload: res.data
@@ -41,7 +41,7 @@ export const loadUser = () => (dispatch, getstate) => {
             dispatch({
                 type:AUTH_ERROR
             })   
-        } )
+        })
 }
 
 export const register = ({ name , email, password, position, access_level,numof_leavedays_given,numof_leavedays_taken, isDeleted }) => dispatch => {

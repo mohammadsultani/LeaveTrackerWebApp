@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import RegisterModal from '../auth/RegisterModal'
 import LoginModal from '../auth/LoginModal'
 import { Collapse, Navbar, NavbarToggler, Nav, NavItem, NavLink, Container, Alert, Row, Col } from 'reactstrap'
-
+// import '../../index.css'
 class Guest extends Component {
     constructor() {
         super() 
@@ -24,15 +24,14 @@ class Guest extends Component {
                         <NavbarToggler onClick={this.toggle} />
                         <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="mr-auto" navbar>
-                                <NavItem style={{marginRight:"40%",marginLeft:"50%"}}>
-                                    <NavLink href="">
-                                        <LoginModal /> 
-                                    </NavLink>
-                                </NavItem>
-                                
-                                <NavItem style={{marginLeft:"40%"}}> 
-                                    <NavLink href="">
-                                        <RegisterModal /> 
+                            <NavItem className="loginNav">
+                                <NavLink href="">
+                                    <LoginModal /> 
+                                </NavLink>
+                            </NavItem>
+                            <NavItem className="registerNav"> 
+                                <NavLink href="">
+                                    <RegisterModal /> 
                                 </NavLink>
                             </NavItem>
                         </Nav>
@@ -44,7 +43,6 @@ class Guest extends Component {
                     <Alert color="primary" style={{textAlign:"center"}}>
                         PLease Log in or Register an Account
                     </Alert>
-                   
             </Container>
         )
     }

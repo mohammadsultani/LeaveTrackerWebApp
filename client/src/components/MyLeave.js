@@ -33,6 +33,8 @@ class MyLeave extends Component {
     }
       > 
         <td>{request.type_of_leave}</td>
+        <td>{request.startDate.substring(0,10)}</td>
+        <td>{request.endDate.substring(0,10)}</td>
         <td>{request.number_of_days}</td>
         <td><Button color="info" onClick={this.modalFunction.bind(this,request)}>Click Here</Button></td>
       </tr>
@@ -116,9 +118,11 @@ class MyLeave extends Component {
             <Table>
                 <thead className="thead-dark">
                   <tr>
-                    <th width="40%">Type of Leave</th>
-                    <th width="30%">Number of Days</th>
-                    <th width="30%">Actions</th>
+                    <th width="20%">Type of Leave</th>
+                    <th width="20%">Start Date</th>
+                    <th width="20%">End Date</th>
+                    <th width="20%">Number Of Days</th>
+                    <th width="20%">Actions</th>
                   </tr>
                 </thead>
                 <tbody>

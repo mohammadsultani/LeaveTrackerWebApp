@@ -23,3 +23,26 @@ code {
   background-color: #4CAF50; /* Green */
   color: white;
 }
+@media only screen and (min-width: 700px) {
+   .registerNav {   /*  It is used for navbar in Guest Component */
+   margin-left:40%;
+   margin-right: 50%;
+   font-size: 1.5rem;
+  }
+  .loginNav{          /* It is used for navbar in Guest Component */
+    margin-left: 100%;
+    margin-right: 50%;
+    font-size: 1.5rem;
+  } 
+  .firstDiv {
+    margin-left: 10%;     /* It is used for Navabr in FullAccess Component */
+  }
+  .secondDiv {             /* It is used for Navabr in FullAccess Component */
+    margin-left: 30%;
+   
+  }
+  .firstSection {           /* It is used for Navbar in Normal Access Component   */
+    margin-left: 10%;
+  }
+ 
+}

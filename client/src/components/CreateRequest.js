@@ -22,7 +22,9 @@ class CreateRequest extends Component {
         this.handleChange = this.handleChange.bind(this)
     }
     componentDidMount(){
-    this.props.fetchLeaveTypes()    
+    this.props.fetchLeaveTypes() 
+    this.setState({ numOfLeaveDaysAllowed:(this.props.numOfLeaveDaysGiven - this.props.numOfLeaveDaysTaken)}) 
+
     }
     handleChange = (e) => {
         this.setState({
@@ -43,7 +45,11 @@ class CreateRequest extends Component {
     componentDidUpdate(prevProps) { // This function display backend feedback to user
        const { error, msg ,} = this.props
        if(error !== prevProps.error) {
-            alert("Leave Request Failed!") 
+            if(error.msg.msg === "Token is not valid!"){
+                alert("Please Login Again!")
+             }else{
+                alert("Leave Request Failed!")
+             } 
         }else if(msg !== prevProps.msg) {
             alert("Leave Request Added!")
          }

@@ -86,9 +86,10 @@ class UsersList extends Component {
                 <Table>
                     <thead className="thead-dark">
                         <tr>
-                            <th width="30%">Name</th>
-                            <th width="40%">Position</th>
-                            <th width="30%">Actions</th>
+                            <th width="20%">Name</th>
+                            <th width="40%">email</th>
+                            <th width="20%">Position</th>
+                            <th width="20%">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -97,6 +98,7 @@ class UsersList extends Component {
                         const color = this.props.positionTypes.filter(e => e.position_type === user.position ).map(e => e.position_color) 
                         return( <tr style={{backgroundColor:color}} key={index}>
                                     <th>{user.name}</th>
+                                    <th>{user.email}</th>
                                     <th>{user.position}</th>
                                     <th>
                                         <button onClick={this.actionModal.bind(this,user)}>Click Here</button>

@@ -27,8 +27,7 @@ class FullAccess extends Component {
                         <Navbar color="dark" dark expand="md">
                             <NavbarToggler onClick={this.toggle} />
                             <Collapse isOpen={this.state.isOpen} navbar>
-                            <Row>
-                                <Col md={9}>
+                                <div className="firstDiv">   {/*      The div is used for CSS Styling  */}
                                     <Nav className="mr-auto" navbar>
                                         <UncontrolledDropdown nav inNavbar>
                                             <DropdownToggle nav caret>
@@ -65,26 +64,19 @@ class FullAccess extends Component {
                                         <NavItem>
                                             <NavLink href="/adminpage">Admin Page</NavLink>
                                         </NavItem>
-                                        
                                     </Nav>
-                                </Col> 
-                                <Col md={3}>
-                                    <div className="row">
-                                        <div className="col-md-4">
-                                        <Nav className="mr-auto" navbar>
-                                        <NavItem>
-                                            <NavLink href="/" onClick={this.logout}>Logout</NavLink>
-                                        </NavItem>
-                                        </Nav>
-                                        </div>
-                                        <div className="col-md-2" > 
-                                        </div>
-                                        <div className="col-md-5" >
-                                            <NavbarText style={{fontSize:"70%"}}>Welcome {this.props.userName}</NavbarText>  
-                                        </div>
+                                </div>    
+                                <div className="row secondDiv">  {/* The div is used for CSS Styling */}
+                                    <Nav className="mr-auto col-md-3" navbar>
+                                    <NavItem>
+                                        <NavLink href="/" onClick={this.logout}>Logout</NavLink>
+                                    </NavItem>
+                                    </Nav>
+                                    <div className="col-md-9">
+                                        <NavbarText  style={this.props.userName.length < 6 ? { marginLeft:"20%"}:null }>Welcome {this.props.userName}</NavbarText>
                                     </div>
-                                </Col>                           
-                            </Row>
+                                          
+                                </div>
                             </Collapse>
                         </Navbar>
                 </Container>

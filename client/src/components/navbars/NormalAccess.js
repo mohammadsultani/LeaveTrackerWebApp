@@ -27,39 +27,31 @@ class NormalAccess extends Component {
                     <Navbar color="dark" dark expand="md">
                         <NavbarToggler onClick={this.toggle} />
                         <Collapse isOpen={this.state.isOpen} navbar>
-                        <Row>
-                            <Col md={9}>
-                                <Nav className="mr-auto" navbar>
-                                    <NavItem>
-                                        <NavLink href="/create">Create Leave Request</NavLink>
-                                    </NavItem>
-                                    <NavItem>
-                                        <NavLink href="/myleaves">My Leaves</NavLink>
-                                    </NavItem>
-                                    <NavItem>
-                                        <NavLink href="/editaccount">Edit Account</NavLink>
-                                    </NavItem>
-                                    
-                                </Nav>
-                            </Col>
-                            <Col md={3}>
-                                <div className="row">
-                                    <div className="col-md-4">
-                                        <Nav className="mr-auto" navbar>
-                                            <NavItem>
-                                                <NavLink href="/" onClick={this.logout}>Logout</NavLink>
-                                            </NavItem>
-                                        </Nav>
-                                    </div>
-                                    <div className="col-md-4"></div>
-                                    <div className="col-md-4">
-                                        <NavbarText style={{fontSize:"70%"}}>Welcome {this.props.userName}</NavbarText>
-                                    </div>
-                                </div>
+                            <Nav className="mr-auto firstSection" navbar>
+                                <NavItem className="create">
+                                    <NavLink href="/create">Create Leave Request</NavLink>
+                                </NavItem>
+                                <NavItem className="myLeave">
+                                    <NavLink href="/myleaves">My Leaves</NavLink>
+                                </NavItem>
+                                <NavItem className="edit">
+                                    <NavLink href="/editaccount">Edit Account</NavLink>
+                                </NavItem>
                                 
-                            </Col>
-                        </Row>
-                        </Collapse>
+                            </Nav>
+                            <div className="row secondSection">
+                                <div className="col-md-3">
+                                    <Nav className="mr-auto" navbar>
+                                        <NavItem>
+                                            <NavLink href="/" onClick={this.logout}>Logout</NavLink>
+                                        </NavItem>
+                                    </Nav>
+                                </div>
+                                <div className="col-md-9">
+                                    <NavbarText style={this.props.userName.length < 6 ? { marginLeft:"20%"}:null }>Welcome {this.props.userName}</NavbarText>
+                                </div>
+                            </div>
+s                        </Collapse>
                     </Navbar>
                     
             </Container>
