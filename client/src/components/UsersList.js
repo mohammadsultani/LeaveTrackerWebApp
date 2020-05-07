@@ -91,7 +91,7 @@ class UsersList extends Component {
                             <tr>
                                 <th width="20%">Name</th>
                                 <th width="40%">email</th>
-                                <th width="20%">Position</th>
+                                <th width="20%">Access Level</th>
                                 <th width="20%">Actions</th>
                             </tr>
                         </thead>
@@ -102,7 +102,7 @@ class UsersList extends Component {
                             return( <tr style={{backgroundColor:color}} key={index}>
                                         <th>{user.name}</th>
                                         <th>{user.email}</th>
-                                        <th>{user.position}</th>
+                                        <th>{user.access_level}</th>
                                         <th>
                                             <button onClick={this.actionModal.bind(this,user)}>Click Here</button>
                                         </th>

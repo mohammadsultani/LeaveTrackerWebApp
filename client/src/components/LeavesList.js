@@ -94,16 +94,16 @@ class LeavesList extends Component {
     const color = this.props.leaveTypes.filter(e => e.type_of_leave === leaveType).map(e => e.type_of_color)
     return (
       <tr style={{ backgroundColor:color}} key={index}>
-        <td width="30%">
+        <td>
           {request.name}
         </td>
-        <td width="10%">
+        <td>
           {request.number_of_days}
         </td>
-        <td width="30%">
+        <td>
           {request.status}
         </td>
-        <td width="30%">
+        <td>
           <button onClick={this.triggerModal.bind(this, request)}>Click Here</button>
         </td>
     </tr>
@@ -112,19 +112,20 @@ class LeavesList extends Component {
   }
   render() {
     const approve = <div>
-      <button onClick={this.closeModal}>Close</button>
+      <Button color="secondary" onClick={this.closeModal}>Close</Button>
     </div>
 
     const deny = <div>
-      <button onClick={this.closeModal}>Close</button>
+      <Button color="secondary" onClick={this.closeModal}>Close</Button>
     </div>
     const newRequest = <div>
-      <button onClick={this.denyRequest}>Deny</button>
-      <button onClick={this.approveRequest}>Approve</button>
-      <button onClick={this.closeModal}>Close</button>
+      <Button color="danger" onClick={this.denyRequest}>Deny</Button>
+      <Button color="primary" onClick={this.approveRequest}>Approve</Button>
+      <Button color="secondary" onClick={this.closeModal}>Close</Button>
     </div>
     if (this.props.accessLevel === "Normal Access") {
       return(
+        //    This is the Leave List for Normal Access  
             <Container>
               <Row>
                 {
@@ -161,13 +162,14 @@ class LeavesList extends Component {
               </Table>
             </Container>       
       )
-    }else {
+    }else {   
+      //     This is The Leave List for Full Access
       return (
         <Container>
           <Row>
             {
               this.props.leaveTypes.map((e,i) => (
-                <Col key={i} style={{backgroundColor:e.type_of_color}}>{e.type_of_leave}</Col>
+                <Col key={i} style={{backgroundColor:e.type_of_color, textAlign:"center"}}>{e.type_of_leave}</Col>
               ))
             }
           </Row>
@@ -175,10 +177,10 @@ class LeavesList extends Component {
           <Table>
             <thead className="thead-dark">
               <tr>
-                <th>Name</th>
-                <th>Number of Days</th>
-                <th>Request Status</th>
-                <th>Actions</th>
+                <th width="30%">Name</th>
+                <th width="20%">Number of Days</th>
+                <th width="30%">Request Status</th>
+                <th width="20%">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -249,15 +251,15 @@ class LeavesList extends Component {
                     <Label>Action Reason</Label>
                     <Input type="textarea" name="actionReason" value={this.state.actionReason} onChange={this.handleChange} />
                   </FormGroup> : 
-                  this.state.leaveRequest.status === "Approved" || "Taken" ? 
+                  this.state.leaveRequest.status === "Approved" || this.state.leaveRequest.status === "Taken" ? 
                   <FormGroup>
                     <Label>Approved Reason</Label>
-                    <Input type="textarea" value={this.state.leaveRequest.action_reason} disabled />
-                  </FormGroup> : 
+                    <Input type="textarea" placeholder={this.state.leaveRequest.action_reason} disabled />
+                  </FormGroup> :
                   <FormGroup>
                     <Label>Denied Reason</Label>
-                    <Input type="textarea" value={this.state.leaveRequest.action_reason} disabled />
-                  </FormGroup> 
+                    <Input type="textarea" placeholder={this.state.leaveRequest.action_reason} disabled />
+                  </FormGroup>
                 }
                 
               </Form>

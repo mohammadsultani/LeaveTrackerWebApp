@@ -65,30 +65,39 @@ componentDidUpdate(prevProps) {
         }
     }
 }
+emailValidation = (email) => {  // It validate the email given by the user 
+    var re = (/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+    return re.test(String(email).toLowerCase())
+}
+
 onSubmit = e => {
     e.preventDefault()
-    if (this.state.password1 === this.state.password2){
-        if(this.state.password1.length > 5){
-            const newUser = {
-                name: this.state.name,
-                email: this.state.email,
-                password: this.state.password1,
-                position: this.state.position,
-                access_level: "",
-                numof_leavedays_given: null,
-                numof_leavedays_taken: null,
-                isDeleted: "false"
+    if(this.emailValidation(this.state.email)){ // Here it call the email validation function
+        if (this.state.password1 === this.state.password2){
+            if(this.state.password1.length > 5){
+                const newUser = {
+                    name: this.state.name,
+                    email: this.state.email.toLowerCase(),
+                    password: this.state.password1,
+                    position: this.state.position,
+                    access_level: "Normal Access",
+                    numof_leavedays_given: null,
+                    numof_leavedays_taken: null,
+                    isDeleted: "false"
+                }
+                this.props.register(newUser)
             }
-            this.state.position === "Executive" ? newUser.access_level = 'Full Access' : newUser.access_level = 'Normal Access'
-            
-            this.props.register(newUser)
         }
+    }else {
+        this.setState({ msg: "Invalid Email!"})
     }
+    
     
 }  
     render() {
         const wrongPassword = "Password is not matching"
         const passwordLength = "Password should be at least 6 charachters"
+        const style = {textAlign: "center"}
         return (
             <Container>
                 <NavLink onClick={this.triggerModal} href="#">Register</NavLink>
@@ -97,11 +106,11 @@ onSubmit = e => {
                     <ModalBody>
                     { 
                     this.state.password1 !== this.state.password2 ? 
-                    <Alert color="danger" >{wrongPassword}</Alert> :
+                    <Alert style={style} color="danger" >{wrongPassword}</Alert> :
                     this.state.msg ?  
-                    <Alert color="danger" >{this.state.msg}</Alert> :
+                    <Alert style={style} color="danger" >{this.state.msg}</Alert> :
                     this.state.password1.length < 6 && this.state.password1.length > 0 ? 
-                    <Alert color="danger" >{passwordLength}</Alert> :
+                    <Alert style={style} color="danger" >{passwordLength}</Alert> :
                     null
                     }
                     <Form>

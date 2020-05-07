@@ -16,7 +16,7 @@ router.post('/',(req,res) => {
             if(!user) {
                 res.status(400).json({ msg: 'User Does not exists!'}) 
             }else if (user.isDeleted) {
-                res.status(400).json({ msg: 'User is Deleted!'}) 
+                res.status(400).json({ msg: 'User Does not exists!'}) 
             }
 
         bcrypt.compare(password, user.password)

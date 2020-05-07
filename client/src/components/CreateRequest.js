@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Button, Form, FormGroup, Label, Input, Alert } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Alert, Container } from 'reactstrap';
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
 import { postLeaveRequest } from '../actions/leaveActions'
@@ -76,7 +76,9 @@ class CreateRequest extends Component {
     
     render() { 
         if((this.props.numOfLeaveDaysGiven - this.props.numOfLeaveDaysTaken) > 0 ) {
-            return ( <Form>
+            return ( 
+            <div>
+            <Form>
                 <FormGroup>
                     <Label>Name</Label>
                     <Input type="text" placeholder={this.props.name} disabled />
@@ -119,9 +121,10 @@ class CreateRequest extends Component {
                         </div>
                 </FormGroup>
                 <Button type="submit" color="primary" onClick={this.submitRequest}>Submit</Button>
-            </Form>
-              
                 
+            </Form>
+            <br/>
+            </div>
                 )
         
         }else{

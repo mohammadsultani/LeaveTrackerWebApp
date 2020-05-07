@@ -4,6 +4,7 @@ import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
 import { Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
 import { updateLeaveRequest } from '../actions/leaveActions'
+import { fetchLeaveTypes } from '../actions/leaveTypesAction'
 
 
 class EditRequest extends Component {
@@ -13,17 +14,17 @@ class EditRequest extends Component {
 
         this.state = {
             name: "",
-            typeOfLeave:"Annual",
+            typeOfLeave:"",
             leaveReason: "",
             numberOfDays:null,
             startDate:new Date(),
             endDate:new Date(),
-
-            
-            leavesArray: ["Annual","Medical","Emergency"],
         }
+       
     }
-    
+    componentDidMount() {
+        this.props.fetchLeaveTypes()
+    }
 
     handleChange = ({ target }) => {
         this.setState({
@@ -69,16 +70,17 @@ class EditRequest extends Component {
                     <FormGroup>
                     <Label>Type of Leave</Label>
                     <Input type="select" name="typeOfLeave" onChange={this.handleChange} value={this.state.typeOfLeave}>
+                           <option>Select One</option>
                         {      
-                            this.state.leavesArray.map((e,i) => (
-                                <option key={i}>{e}</option>
+                            this.props.leaveTypes.map((e,i) => (
+                                <option key={i}>{e.type_of_leave}</option>
                             ))
                         }
                     </Input>
                     </FormGroup>
                     <FormGroup>
                     <Label>Leave Reason</Label>
-                    <Input type="textarea" name="leaveReason" placeholder={this.props.leaveRequest.leave_reason} onChange={this.handleChange} />
+                    <Input type="textarea" name="leaveReason" placeholder={this.props.leaveRequest.leave_reason} onChange={this.handleChange.bind(this)} />
                     </FormGroup>
                     <FormGroup>
                     <Label>Number of Days</Label>
@@ -104,18 +106,21 @@ class EditRequest extends Component {
                     </FormGroup>
                     <Button type="submit" color="primary" onClick={this.onSubmit}>Submit</Button>
                 </Form>
+                < br />
             </Container>
         )
     }
 }
 const mapStateToProps = state => {
     return {
-        leaveRequest: state.requests.leaveRequest
+        leaveRequest: state.requests.leaveRequest,
+        leaveTypes: state.types.leaveTypes
     }
 }
 const mapDispatchToProps = dispatch => {
     return {
-        updateLeaveRequest: (e) => dispatch(updateLeaveRequest(e))
+        updateLeaveRequest: (e) => dispatch(updateLeaveRequest(e)),
+        fetchLeaveTypes: () => dispatch(fetchLeaveTypes())
         
     }
 }

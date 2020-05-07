@@ -30,25 +30,37 @@ class EditAccount extends Component {
                 this.setState({ msg : null })
             }
         }
-    }  
+    } 
+    
+    emailValidation = (email) => {  // It validate the email given by the user 
+        var re = (/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+        return re.test(String(email).toLowerCase())
+    }
+
     onSubmit = () => {
-        this.setState({ msg: ""})
-        const updatedUser = {
-           name : this.props.userName,
-           email: this.state.email,
-           position: this.state.position,
-           id: this.props.userId
-       }
-       this.props.updateUserAccount(updatedUser)
+        if(this.emailValidation(this.state.email)){ // Here it call the email validation function
+            this.setState({ msg: ""})
+            const updatedUser = {
+            name : this.props.userName,
+            email: this.state.email,
+            position: this.state.position,
+            id: this.props.userId
+        }
+            this.props.updateUserAccount(updatedUser)
+        }else{
+            this.setState({msg: "Invalid Email!"})
+        }
+        
     }
         
     
     render() {
+        const style = {textAlign: "center"}
         return (
             <Container>
                 <Form>
                     { 
-                        this.state.msg ? <Alert color="danger" >{this.state.msg}</Alert> : null  
+                        this.state.msg ? <Alert style={style} color="danger" >{this.state.msg}</Alert> : null  
                     }
                     <FormGroup>
                     <Label>Name</Label>
