@@ -15,7 +15,7 @@ import EditAccount from './components/EditAccount'
 import RequiredAuth from './components/Authorization'
 import AdminPage from './components/AdminPage'
 import ResetPassword from './components/ResetPassword'
-import calender from './components/Calender'
+import { Container } from 'reactstrap';
 
 class App extends Component {
   
@@ -31,19 +31,18 @@ class App extends Component {
     return (
       <Provider store={store} >
           <Router>
-            <div className="container">
             <Navbar />
-            <br/>
-            <Route path="/calender" component={calender}/>
-            <Route path="/editaccount" component={RequiredAuth(EditAccount)}/>
-            <Route path="/resetpass/:token" component={ResetPassword} />
-            <Route path="/myleaves" component={RequiredAuth(MyLeaves)}/>
-            <Route path="/leaveslist" component={RequiredAuth(LeavesList)} />
-            <Route path="/edit/:id" component={RequiredAuth(EditRequest)}/>
-            <Route path="/create" component={RequiredAuth(CreateRequest)}/>
-            <Route path="/adminpage" component={RequiredAuth(AdminPage)}/>
-            <Route path="/userslist" component={RequiredAuth(UsersList)}/>
-            </div>
+            <Container>
+              <br/>
+              <Route path="/editaccount" component={RequiredAuth(EditAccount)}/>
+              <Route path="/resetpass/:token" component={ResetPassword} />
+              <Route path="/myleaves" component={RequiredAuth(MyLeaves)}/>
+              <Route path="/leaveslist" component={RequiredAuth(LeavesList)} />
+              <Route path="/edit/:id" component={RequiredAuth(EditRequest)}/>
+              <Route path="/create" component={RequiredAuth(CreateRequest)}/>
+              <Route path="/adminpage" component={RequiredAuth(AdminPage)}/>
+              <Route path="/userslist" component={RequiredAuth(UsersList)}/>
+            </Container>
           </Router>
       </Provider>
     );

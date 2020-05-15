@@ -75,7 +75,6 @@ class CreateRequest extends Component {
     }
     
     render() { 
-        if((this.props.numOfLeaveDaysGiven - this.props.numOfLeaveDaysTaken) > 0 ) {
             return ( 
             <div>
             <Form>
@@ -125,11 +124,7 @@ class CreateRequest extends Component {
             </Form>
             <br/>
             </div>
-                )
-        
-        }else{
-            return (<Alert color="danger" style={{textAlign:"center", marginTop:"20%"}}>You do not have any leave Allowance</Alert>) 
-        }  
+        )
     }
 }
 const mapStateToProps = state => {
