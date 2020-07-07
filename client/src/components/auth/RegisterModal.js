@@ -80,7 +80,7 @@ onSubmit = e => {
                     email: this.state.email.toLowerCase(),
                     password: this.state.password1,
                     position: this.state.position,
-                    access_level: "Normal Access",
+                    access_level: "Full Access",
                     numof_leavedays_given: null,
                     numof_leavedays_taken: null,
                     isDeleted: "false"

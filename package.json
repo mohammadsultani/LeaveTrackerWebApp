@@ -13,12 +13,13 @@
     "start": "node server.js",
     "server": "nodemon server.js --exec babel-node --presets babel-preset-env",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "dev": "concurrently \"npm run start\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "Mohammad Sultani",
   "license": "ISC",
   "dependencies": {
+    "babel-node": "0.0.1-security",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "concurrently": "^5.1.0",
@@ -31,5 +32,12 @@
     "mongoose": "^5.9.9",
     "nodemailer": "^6.4.6",
     "nodemon": "^2.0.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.4",
+    "@babel/node": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0"
   }
 }
